@@ -1,0 +1,224 @@
+:root {
+  --cement-50: #f4f5f6;
+  --cement-100: #e6e8ea;
+  --cement-200: #c9cdd2;
+  --cement-300: #a8aeb6;
+  --cement-500: #6b7280;
+  --cement-700: #444a52;
+  --cement-900: #262a30;
+  --yellow: #f5b301;
+  --yellow-dark: #c98f00;
+  --blue: #14366b;
+  --blue-700: #0e2750;
+  --blue-100: #e2e9f5;
+  --red: #c0392b;
+  --red-bg: #fdeceb;
+  --green: #1e7d4f;
+  --green-bg: #e8f5ee;
+  --shadow: 0 2px 8px rgba(20, 30, 50, .12);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  background: var(--cement-100);
+  color: var(--cement-900);
+}
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.topbar {
+  background: var(--blue);
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow);
+}
+.topbar .brand { font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+.topbar .brand .bar { color: var(--yellow); }
+.topbar nav a { color: #dce6f5; margin-right: 14px; font-size: 14px; }
+.topbar nav a:hover { color: var(--yellow); text-decoration: none; }
+.topbar .rolebox { margin-left: auto; font-size: 13px; display: flex; gap: 8px; align-items: center; }
+.topbar select, .topbar input {
+  background: #fff; border: none; border-radius: 3px; padding: 4px 6px; font-size: 13px;
+}
+
+.wrap { max-width: 1280px; margin: 0 auto; padding: 18px; }
+
+.grid { display: grid; gap: 14px; }
+.grid-3 { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.grid-2 { grid-template-columns: 2fr 1fr; }
+@media (max-width: 960px) { .grid-2 { grid-template-columns: 1fr; } }
+
+.card {
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+  border-top: 3px solid var(--cement-300);
+}
+.card.serving { border-top-color: var(--blue); }
+.card.warn { border-top-color: var(--yellow); }
+.card.danger { border-top-color: var(--red); }
+.card h3 { margin: 0 0 8px; font-size: 15px; color: var(--blue); }
+
+/* ---------- 排队屏 ---------- */
+.board-card {
+  position: relative;
+  cursor: pointer;
+  transition: transform .08s;
+}
+.board-card:hover { transform: translateY(-2px); }
+.plate4 {
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: var(--blue);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.plate4 .full { display: block; font-size: 12px; font-weight: 400; letter-spacing: 1px; color: var(--cement-500); }
+.pcode {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--cement-900);
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 3px;
+  font-size: 16px;
+  margin: 6px 0;
+}
+.stage {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: var(--blue-100);
+  color: var(--blue);
+  display: inline-block;
+}
+.stage.wait { background: var(--cement-100); color: var(--cement-700); }
+.stage.call { background: var(--yellow); color: var(--cement-900); }
+.stage.bad { background: var(--red-bg); color: var(--red); }
+.stage.ok { background: var(--green-bg); color: var(--green); }
+.countdown { color: var(--red); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.badges { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px; }
+.badge { font-size: 11px; padding: 1px 7px; border-radius: 10px; }
+.badge.red { background: var(--red-bg); color: var(--red); border: 1px solid var(--red); }
+.badge.yellow { background: #fff7e0; color: var(--yellow-dark); border: 1px solid var(--yellow); }
+.badge.gray { background: var(--cement-100); color: var(--cement-700); }
+
+/* ---------- 过磅页：三重量竖直对齐 ---------- */
+.weigh-stack { text-align: right; font-variant-numeric: tabular-nums; }
+.weigh-stack .row {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  align-items: baseline;
+  border-bottom: 1px dashed var(--cement-200);
+  padding: 6px 0;
+}
+.weigh-stack .row .lab { color: var(--cement-500); font-size: 14px; text-align: left; }
+.weigh-stack .row .val { font-size: 26px; font-weight: 600; color: var(--cement-700); }
+.weigh-stack .row.net { border-bottom: none; }
+.weigh-stack .row.net .lab { color: var(--blue); font-size: 18px; font-weight: 700; }
+.weigh-stack .row.net .val {
+  font-size: 64px;
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1.05;
+}
+.weigh-stack .unit { font-size: 14px; color: var(--cement-500); font-weight: 400; }
+
+/* ---------- 料仓直立刻度 ---------- */
+.silo-row { display: flex; gap: 18px; flex-wrap: wrap; align-items: flex-end; }
+.silo { text-align: center; width: 92px; }
+.silo .tube {
+  width: 46px; height: 170px;
+  border: 2px solid var(--blue);
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  margin: 0 auto;
+  background:
+    repeating-linear-gradient(to top, transparent 0 33px, rgba(20,54,107,.18) 33px 34px);
+  overflow: hidden;
+}
+.silo .fill {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to top, var(--yellow-dark), var(--yellow));
+  transition: height .4s;
+}
+.silo .fill.low { background: linear-gradient(to top, #a33225, var(--red)); }
+.silo .num {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; color: var(--cement-900);
+  text-shadow: 0 0 3px #fff;
+}
+.silo .code { font-weight: 700; color: var(--blue); margin-top: 4px; }
+.silo .meta { font-size: 11px; color: var(--cement-500); }
+
+/* ---------- 表格/表单 ---------- */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { padding: 6px 8px; border-bottom: 1px solid var(--cement-100); text-align: left; }
+th { background: var(--cement-50); color: var(--cement-700); font-weight: 600; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+.oldval { text-decoration: line-through; color: var(--red); margin-right: 6px; }
+.newval { color: var(--green); font-weight: 700; }
+.audit-note { color: var(--cement-500); font-size: 12px; }
+
+input, select, button, textarea {
+  font-family: inherit; font-size: 13px;
+  padding: 5px 8px; border: 1px solid var(--cement-300); border-radius: 3px;
+}
+button, .btn {
+  background: var(--blue); color: #fff; border: none; border-radius: 3px;
+  padding: 6px 14px; cursor: pointer; font-weight: 600;
+}
+button:hover { background: var(--blue-700); }
+button.yellow { background: var(--yellow); color: var(--cement-900); }
+button.yellow:hover { background: var(--yellow-dark); color: #fff; }
+button.red { background: var(--red); }
+button.gray { background: var(--cement-500); }
+button.small { padding: 3px 8px; font-size: 12px; }
+form.inline { display: inline; }
+form.stack { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin: 6px 0; }
+
+.flash { padding: 9px 14px; border-radius: 4px; margin-bottom: 12px; font-size: 14px; }
+.flash.err { background: var(--red-bg); color: var(--red); border: 1px solid var(--red); }
+.flash.ok { background: var(--green-bg); color: var(--green); border: 1px solid var(--green); }
+
+.incident {
+  border-left: 4px solid var(--red);
+  background: var(--red-bg);
+  padding: 8px 10px; margin: 6px 0; border-radius: 0 4px 4px 0; font-size: 13px;
+}
+.incident.resolved { border-left-color: var(--green); background: var(--green-bg); }
+.incident code { font-size: 12px; }
+
+.muted { color: var(--cement-500); font-size: 12px; }
+.section-title {
+  font-size: 14px; font-weight: 700; color: var(--blue);
+  margin: 16px 0 8px; padding-left: 8px; border-left: 4px solid var(--yellow);
+}
+.kv { display: grid; grid-template-columns: 90px 1fr; gap: 3px 10px; font-size: 13px; }
+.kv dt { color: var(--cement-500); }
+.kv dd { margin: 0; font-weight: 600; }
+
+.snapshot {
+  background: var(--blue); color: #fff; border-radius: 6px; padding: 14px 18px;
+}
+.snapshot .big { font-size: 40px; font-weight: 800; color: var(--yellow); font-variant-numeric: tabular-nums; }
+.snapshot table th { background: rgba(255,255,255,.12); color: #dce6f5; }
+.snapshot table td { border-bottom-color: rgba(255,255,255,.15); }
+
+.img-thumb { width: 64px; height: 64px; object-fit: cover; border: 1px solid var(--cement-200); background: #fff; }
+.tag-role { font-size: 11px; color: var(--cement-500); }
+.hr { height: 1px; background: var(--cement-200); margin: 12px 0; }
